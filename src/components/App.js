@@ -18,24 +18,33 @@ const searchArray = [
   "Meta",
 ];
 const App = () => {
-  let [inputVal, setinputVal] = useState("");
-  let [searchedArr, setearchedArr] = useState([]);
+  let inputVal = "";
+  let [searchedArr, setSearchedArr] = useState([]);
+
   const valueOfInput = (event) => {
-    setinputVal(event.target.value);
-    displayResult();
+    setSearchedArr([]);
+   inputVal = event.target.value;
+    setTimeout(() => {
+      if(inputVal !== ""){
+        displayResult(inputVal);
+      }
+    }, 500);
+    
   };
 
-  const displayResult = () => {
+  const displayResult = (inputVal) => {
+    
     let arr = [];
     searchArray.map((str) => {
       str = str.toLowerCase();
       let substr = inputVal.toLowerCase();
-      if (str.indexOf(substr) != -1) {
+      console.log(substr,"line34")
+      if (str.indexOf(substr) !== -1) {
         console.log(str);
         arr.push(str);
       }
     });
-    setearchedArr(arr);
+    setSearchedArr(arr);
     // let ans = searchedArr.map((item) => {
     //   return <list value={item} />;
     // });
@@ -44,7 +53,7 @@ const App = () => {
   return (
     <div id="main">
       <h1>Search</h1>
-      <input value={inputVal} onChange={valueOfInput} />
+      <input type={"text"} onChange={valueOfInput} />
       <h3>Results</h3>
       <ol id="ul">
         {                  
